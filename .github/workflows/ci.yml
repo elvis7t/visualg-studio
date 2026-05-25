@@ -32,6 +32,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
+      - name: Set up build tools (Windows)
+        if: runner.os == 'Windows'
+        uses: microsoft/setup-msbuild@v1
+
       - name: Install dependencies
         run: npm ci
 

@@ -1,6 +1,6 @@
 {
   "name": "visualg-studio",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "public": true,
   "type": "module",
   "description": "Modern Electron studio for Visualg algorithms.",
@@ -72,6 +72,7 @@
     "linux": {
       "icon": "resources/icon.png",
       "category": "Development",
+      "maintainer": "Elvis Leite da Silva <elvis7t@gmail.com>",
       "target": [
         "AppImage",
         "deb"
