@@ -1,0 +1,51 @@
+name: CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Run Tests on ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        node-version: [20]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run verification (Syntax Check & Coverage)
+        run: |
+          npm run check
+          npm run test:coverage
+
+      - name: Check renderer bundle is up to date
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          npm run build:renderer
+          if ! git diff --quiet src/renderer/bundle.js; then
+            echo "::error file=src/renderer/bundle.js::src/renderer/bundle.js está desatualizado. Rode 'npm run build:renderer' localmente e commite o resultado."
+            git --no-pager diff -- src/renderer/bundle.js | head -60
+            exit 1
+          fi
