@@ -1,0 +1,499 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>VisuAlg Studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand">
+          <img class="brand-mark" src="../../resources/icon.png" alt="" />
+          <div>
+            <strong>VisuAlg Studio</strong>
+            <span class="app-version">v0.1.0</span>
+            <span id="fileLabel">Sem arquivo</span>
+          </div>
+        </div>
+        <nav class="actions" aria-label="Acoes do editor">
+          <button id="newButton" class="toolbar-button" title="Novo">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14" /></svg>
+            </span>
+            <span class="button-label">Novo</span>
+          </button>
+          <button id="openButton" class="toolbar-button" title="Abrir">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M4 7h6l2 3h8v8.5A2.5 2.5 0 0 1 17.5 21h-11A2.5 2.5 0 0 1 4 18.5V7Z" /><path d="M4 10h16" /></svg>
+            </span>
+            <span class="button-label">Abrir</span>
+          </button>
+          <button id="saveButton" class="toolbar-button" title="Salvar">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 4v10" /><path d="m8 10 4 4 4-4" /><path d="M5 19h14" /></svg>
+            </span>
+            <span class="button-label">Salvar</span>
+          </button>
+          <button id="debugButton" class="toolbar-button" title="Depurar">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24">
+                <path d="M8 8.5a4 4 0 0 1 8 0V15a4 4 0 0 1-8 0V8.5Z" />
+                <path d="M9 4.5 7.5 3" />
+                <path d="M15 4.5 16.5 3" />
+                <path d="M4 10h4" />
+                <path d="M16 10h4" />
+                <path d="M4 15h4" />
+                <path d="M16 15h4" />
+                <path d="M10 12h4" />
+                <path d="M12 8.5V19" />
+              </svg>
+            </span>
+            <span class="button-label">Depurar</span>
+          </button>
+          <button id="debugPreviousButton" class="toolbar-button" title="Voltar">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m11 7-5 5 5 5" /><path d="M18 7v10" /></svg>
+            </span>
+            <span class="button-label">Voltar</span>
+          </button>
+          <button id="debugNextButton" class="toolbar-button" title="Próximo">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="m13 7 5 5-5 5" /><path d="M6 7v10" /></svg>
+            </span>
+            <span class="button-label">Próximo</span>
+          </button>
+          <button id="debugContinueButton" class="toolbar-button" title="Continuar até o próximo ponto de parada">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M6 5v14l8-7-8-7Z" /><path d="M17 5v14" /></svg>
+            </span>
+            <span class="button-label">Continuar</span>
+          </button>
+          <button id="debugStopButton" class="toolbar-button danger" title="Parar">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 8h8v8H8z" /></svg>
+            </span>
+            <span class="button-label">Parar</span>
+          </button>
+          <button id="clearAllButton" class="toolbar-button" title="Limpar" aria-label="Limpar">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" data-lucide="brush-cleaning">
+                <path d="m16 22-1-4" />
+                <path d="M19 13.99a1 1 0 0 0 1-1V12a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v.99a1 1 0 0 0 1 1" />
+                <path d="M5 14h14l1.973 6.767A1 1 0 0 1 20 22H4a1 1 0 0 1-.973-1.233z" />
+                <path d="m8 22 1-4" />
+              </svg>
+            </span>
+            <span class="button-label">Limpar</span>
+          </button>
+          <button id="runButton" class="toolbar-button primary" title="Executar">
+            <span class="button-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7-11-7Z" /></svg>
+            </span>
+            <span class="button-label">Executar</span>
+          </button>
+        </nav>
+      </header>
+
+      <aside class="activity-bar" aria-label="Barra de Atividades">
+        <div class="activity-bar-top">
+          <button id="activityBtnToggleSidebar" type="button" class="activity-btn active" title="Alternar Barra Lateral" aria-label="Alternar Barra Lateral">
+            <svg class="icon-open" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M3 3h6v18H3z" fill="currentColor" stroke="none" />
+              <path d="M9 3v18" />
+            </svg>
+            <svg class="icon-closed" viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" />
+              <path d="M9 3v18" />
+            </svg>
+          </button>
+          <div class="activity-bar-divider"></div>
+          <button id="activityBtnExplorer" type="button" class="activity-btn active-view" title="Explorador" aria-label="Explorador">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z" />
+              <polyline points="14 2 14 8 20 8" />
+              <circle cx="10" cy="13" r="2" />
+              <path d="m14 17-2.5-2.5" />
+            </svg>
+          </button>
+          <button id="activityBtnDocs" type="button" class="activity-btn" title="Documentação" aria-label="Documentação">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20" />
+              <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z" />
+            </svg>
+          </button>
+          <button id="activityBtnTools" type="button" class="activity-btn" title="Ferramentas" aria-label="Ferramentas">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z" />
+            </svg>
+          </button>
+          <button id="activityBtnTips" type="button" class="activity-btn" title="Dicas" aria-label="Dicas">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A5.5 5.5 0 0 0 12.5 2.5C9.2 2.5 7 5 7 8c0 1.3.5 2.6 1.5 3.5.8.8 1.3 1.5 1.5 2.5" />
+              <line x1="9" y1="18" x2="15" y2="18" />
+              <line x1="10" y1="22" x2="14" y2="22" />
+            </svg>
+          </button>
+          <button id="activityBtnAbout" type="button" class="activity-btn" title="Sobre" aria-label="Sobre">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10" />
+              <line x1="12" y1="16" x2="12" y2="12" />
+              <line x1="12" y1="8" x2="12.01" y2="8" />
+            </svg>
+          </button>
+        </div>
+        <div class="activity-bar-bottom">
+          <button id="activityBtnSettings" type="button" class="activity-btn" title="Configurações" aria-label="Configurações">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="3" />
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z" />
+            </svg>
+          </button>
+        </div>
+      </aside>
+
+      <aside class="sidebar" id="sidebarContainer" aria-label="Painel Lateral">
+        <!-- View 1: Explorer (Recent Files + Examples) -->
+        <div id="sidebarExplorerView" class="sidebar-view">
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Explorador</h2>
+          </div>
+          <div class="sidebar-search">
+            <input id="sidebarSearch" type="search" placeholder="Filtrar arquivos..." autocomplete="off" />
+          </div>
+          <div class="sidebar-content">
+            <details class="sidebar-section" open>
+              <summary><strong>Arquivos Recentes</strong></summary>
+              <div id="recentFilesList" class="recent-files-list">Nenhum arquivo recente.</div>
+            </details>
+            <details class="sidebar-section" open>
+              <summary><strong>Exemplos</strong></summary>
+              <div id="examples" class="example-list"></div>
+            </details>
+          </div>
+        </div>
+
+        <!-- View 2: Settings -->
+        <div id="sidebarSettingsView" class="sidebar-view" hidden>
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Configurações</h2>
+          </div>
+          <div class="sidebar-content settings-sidebar-content">
+            <details class="settings-group" open>
+              <summary><span class="settings-group-icon">◐</span><strong>Aparência</strong></summary>
+              <label>
+                <span>Tema</span>
+                <select id="themeSelect">
+                  <option value="dracula">Dracula</option>
+                  <option value="dark">Dark</option>
+                  <option value="visual-assist-dark">Visual Assist Dark</option>
+                </select>
+              </label>
+              <label>
+                <span>Painéis</span>
+                <select id="layoutSelect">
+                  <option value="console-first">Console acima</option>
+                  <option value="debug-first">Depuração acima</option>
+                </select>
+              </label>
+              <label>
+                <span>Tamanho da fonte geral</span>
+                <span class="range-control">
+                  <input id="generalFontSizeInput" type="range" min="12" max="22" step="1" value="16" />
+                  <output id="generalFontSizeValue" for="generalFontSizeInput">16px</output>
+                </span>
+              </label>
+            </details>
+
+            <details class="settings-group">
+              <summary>
+                <span class="settings-group-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 5h16" /><path d="M4 12h10" /><path d="M4 19h16" /><path d="m17 10 3 2-3 2v-4Z" /></svg>
+                </span>
+                <strong>Editor</strong>
+              </summary>
+              <label>
+                <span>Fonte do editor</span>
+                <select id="editorFontSelect">
+                  <option value="Consolas, Cascadia Code, monospace">Consolas</option>
+                  <option value="Cascadia Code, Consolas, monospace">Cascadia Code</option>
+                  <option value="JetBrains Mono, Consolas, monospace">JetBrains Mono</option>
+                  <option value="Fira Code, Consolas, monospace">Fira Code</option>
+                  <option value="monospace">Monospace</option>
+                </select>
+              </label>
+              <label>
+                <span>Tamanho da fonte do editor</span>
+                <span class="range-control">
+                  <input id="editorFontSizeInput" type="range" min="12" max="28" step="1" value="15" />
+                  <output id="editorFontSizeValue" for="editorFontSizeInput">15px</output>
+                </span>
+              </label>
+              <label>
+                <span>Tab</span>
+                <select id="tabSizeSelect">
+                  <option value="2">2 espaços</option>
+                  <option value="4">4 espaços</option>
+                </select>
+              </label>
+              <label>
+                <span>Quebra de linha</span>
+                <input id="lineWrapSelect" class="switch-input" type="checkbox" role="switch" checked aria-checked="true" />
+              </label>
+              <label>
+                <span>Guias de indentação</span>
+                <input id="indentGuidesSelect" class="switch-input" type="checkbox" role="switch" checked aria-checked="true" />
+              </label>
+              <label>
+                <span>Métricas de complexidade</span>
+                <input id="complexityMetricsSelect" class="switch-input" type="checkbox" role="switch" checked aria-checked="true" />
+              </label>
+            </details>
+
+            <details class="settings-group">
+              <summary><span class="settings-group-icon">▶</span><strong>Execução</strong></summary>
+              <label>
+                <span>Tamanho da fonte do console</span>
+                <span class="range-control">
+                  <input id="consoleFontSizeInput" type="range" min="12" max="24" step="1" value="14" />
+                  <output id="consoleFontSizeValue" for="consoleFontSizeInput">14px</output>
+                </span>
+              </label>
+              <label>
+                <span>Detecção de loop infinito</span>
+                <input id="infiniteLoopDetectionSelect" class="switch-input" type="checkbox" role="switch" checked aria-checked="true" />
+              </label>
+              <label>
+                <span>Painel de depuração</span>
+                <input id="debugPanelVisibilitySelect" class="switch-input" type="checkbox" role="switch" checked aria-checked="true" />
+              </label>
+            </details>
+          </div>
+        </div>
+
+        <!-- View 3: Documentação -->
+        <div id="sidebarDocsView" class="sidebar-view" hidden>
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Documentação</h2>
+          </div>
+          <div class="sidebar-content">
+            <!-- Dynamic documentations inside details/summary accordions -->
+          </div>
+        </div>
+
+        <!-- View 4: Ferramentas -->
+        <div id="sidebarToolsView" class="sidebar-view" hidden>
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Ferramentas</h2>
+          </div>
+          <div class="sidebar-content tools-sidebar-content">
+            <button id="exportCodeButton" type="button" class="settings-action-button" title="Exportar código">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3v12" /><path d="m8 11 4 4 4-4" /><path d="M5 21h14" /></svg>
+              </span>
+              <span>Exportar Código</span>
+            </button>
+            <button id="printCodeButton" type="button" class="settings-action-button" title="Imprimir código">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M6 9V3h12v6" /><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2" /><path d="M6 14h12v7H6z" /></svg>
+              </span>
+              <span>Imprimir Código</span>
+            </button>
+            <button id="flowchartButton" type="button" class="settings-action-button" title="Gerar fluxograma">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M9 3h6v4H9z" /><path d="M12 7v3" /><path d="M7 10h10l2 3-2 3H7l-2-3 2-3Z" /><path d="M12 16v3" /><path d="M9 19h6v2H9z" /></svg>
+              </span>
+              <span>Gerar Fluxograma</span>
+            </button>
+            <button id="sidebarExportConsoleButton" type="button" class="settings-action-button" title="Exportar console">
+              <span class="button-icon" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M12 3v12" /><path d="m8 11 4 4 4-4" /><path d="M5 21h14" /></svg>
+              </span>
+              <span>Exportar Console</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- View 5: Dicas -->
+        <div id="sidebarTipsView" class="sidebar-view" hidden>
+          <div class="sidebar-header">
+            <h2 class="sidebar-title">Dicas</h2>
+          </div>
+          <div class="sidebar-content">
+            <!-- Dynamic tips list -->
+          </div>
+        </div>
+      </aside>
+
+      <main class="workspace">
+        <section class="editor-panel">
+          <div class="editor-header">
+            <div class="panel-title">Editor .alg</div>
+            <div class="editor-actions">
+              <button id="indentButton" type="button" class="editor-action-button" title="Indentar codigo">
+                <span class="button-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24"><path d="M4 6h16M12 12h8M4 18h16" /><path d="m4 10 4 2-4 2V10Z" /></svg>
+                </span>
+                <span>Indentar</span>
+              </button>
+            </div>
+          </div>
+          <div id="editorTabs" class="editor-tabs" aria-label="Abas do editor"></div>
+          <div id="searchPanel" class="search-panel" data-mode="find" hidden>
+            <div class="search-row">
+              <label>
+                <span>Buscar</span>
+                <input id="findInput" autocomplete="off" />
+              </label>
+              <button id="findPreviousButton" type="button" class="mini-button" title="Anterior">↑</button>
+              <button id="findNextButton" type="button" class="mini-button" title="Próximo">↓</button>
+              <label class="check-label">
+                <input id="matchCaseInput" type="checkbox" />
+                Aa
+              </label>
+              <span id="searchStatus" class="search-status">Digite para buscar</span>
+              <button id="closeSearchButton" type="button" class="mini-button" title="Fechar">×</button>
+            </div>
+            <div class="replace-row">
+              <label>
+                <span>Substituir</span>
+                <input id="replaceInput" autocomplete="off" />
+              </label>
+              <button id="replaceButton" type="button">Substituir</button>
+              <button id="replaceAllButton" type="button">Tudo</button>
+            </div>
+          </div>
+          <div id="editor"></div>
+        </section>
+
+        <hr id="editorResizer" class="panel-resizer editor-resizer" aria-orientation="horizontal" title="Arraste para redimensionar o editor"></hr>
+
+        <section class="console-panel">
+          <div class="console-header">
+            <div class="panel-title">Console</div>
+            <div class="console-tools">
+              <label>
+                <span>Entrada para leia</span>
+                <textarea id="stdin" rows="1" placeholder="Separe entradas por linha"></textarea>
+              </label>
+              <button id="clearConsoleButton" type="button" class="panel-icon-button" title="Limpar console" aria-label="Limpar console">
+                <svg viewBox="0 0 24 24" data-lucide="brush-cleaning" aria-hidden="true">
+                  <path d="m16 22-1-4" />
+                  <path d="M19 13.99a1 1 0 0 0 1-1V12a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v.99a1 1 0 0 0 1 1" />
+                  <path d="M5 14h14l1.973 6.767A1 1 0 0 1 20 22H4a1 1 0 0 1-.973-1.233z" />
+                  <path d="m8 22 1-4" />
+                </svg>
+              </button>
+              <button id="exportConsoleButton" type="button" class="panel-icon-button" title="Exportar console" aria-label="Exportar console">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v12" /><path d="m8 11 4 4 4-4" /><path d="M5 21h14" /></svg>
+              </button>
+            </div>
+          </div>
+          <pre id="consoleOutput"></pre>
+        </section>
+
+        <hr id="consoleDebugResizer" class="panel-resizer" aria-orientation="horizontal" title="Arraste para redimensionar"></hr>
+
+        <section class="debug-panel">
+          <div class="debug-header">
+            <div class="panel-title">Depuração</div>
+            <button id="clearDebugButton" type="button" class="panel-icon-button" title="Limpar depuração" aria-label="Limpar depuração">
+              <svg viewBox="0 0 24 24" data-lucide="brush-cleaning" aria-hidden="true">
+                <path d="m16 22-1-4" />
+                <path d="M19 13.99a1 1 0 0 0 1-1V12a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v.99a1 1 0 0 0 1 1" />
+                <path d="M5 14h14l1.973 6.767A1 1 0 0 1 20 22H4a1 1 0 0 1-.973-1.233z" />
+                <path d="m8 22 1-4" />
+              </svg>
+            </button>
+          </div>
+          <div class="debug-grid">
+            <ol id="debugSteps" class="debug-steps"></ol>
+            <hr id="debugSideResizer" class="debug-side-resizer" aria-orientation="vertical" title="Arraste para redimensionar os detalhes da depuração"></hr>
+            <div id="debugVariables" class="debug-vars">Sem sessão de depuração.</div>
+          </div>
+        </section>
+      </main>
+      <footer class="status-bar">
+        <div class="status-left">
+          <span> with ❤️ by Elvis Leite 😊</span>
+        </div>
+        <div class="status-right">
+          <div id="editorMetrics" class="editor-metrics" hidden></div>
+          <div id="editorStatus" class="editor-status">Linha 1, Coluna 1</div>
+        </div>
+      </footer>
+    </div>
+
+    <dialog id="inputDialog" class="input-dialog">
+      <form method="dialog" id="inputForm">
+        <header>
+          <strong>Entrada de dados</strong>
+          <span>Valores para comandos leia</span>
+        </header>
+        <div id="inputFields" class="input-fields"></div>
+        <footer>
+          <button type="submit" value="cancel">Cancelar</button>
+          <button type="submit" value="confirm" class="primary">Continuar</button>
+        </footer>
+      </form>
+    </dialog>
+
+
+
+    <dialog id="flowchartDialog" class="flowchart-dialog">
+      <form method="dialog">
+        <header>
+          <strong id="flowchartTitle">Fluxograma</strong>
+          <div class="flowchart-actions">
+            <button id="flowchartZoomOutButton" type="button" title="Diminuir Zoom">−</button>
+            <button id="flowchartZoomResetButton" type="button" title="Restaurar Zoom (100%)">100%</button>
+            <button id="flowchartZoomInButton" type="button" title="Aumentar Zoom">+</button>
+            <button id="flowchartFitButton" type="button" title="Ajustar fluxograma à tela">Ajustar</button>
+            <span class="action-separator">|</span>
+            <button id="flowchartExportSvgButton" type="button" title="Exportar SVG">Exportar SVG</button>
+            <button id="flowchartExportPngButton" type="button" title="Exportar PNG">Exportar PNG</button>
+            <button id="flowchartCloseButton" type="submit" value="close" title="Fechar">Fechar</button>
+          </div>
+        </header>
+        <div id="flowchartContent" class="flowchart-content"></div>
+      </form>
+    </dialog>
+
+
+
+    <dialog id="aboutDialog" class="about-dialog">
+      <form method="dialog">
+        <header>
+          <img src="../../resources/icon.png" alt="" />
+          <div>
+            <strong>VisuAlg Studio</strong>
+            <span>Versão 0.1.0</span>
+          </div>
+        </header>
+        <section>
+          <p>Reescrita independente em Node.js e Electron, inspirada no legado do Visualg.</p>
+          <p>O Visualg original foi criado pelo professor <strong>Claudio Morgado</strong> e posteriormente promovido e mantido pelo professor <strong>Antonio Carlos Nicolodi</strong>, referência fundamental no ensino de algoritmos.</p>
+          <p>Este projeto não é oficial, mas presta homenagem a esses educadores que marcaram gerações de estudantes de programação.</p>
+          <p>Licença: <strong>MIT</strong>.</p>
+          <div id="updaterSection" class="updater-section">
+            <button id="checkForUpdatesButton" type="button">Verificar atualizações</button>
+            <div id="updaterProgressContainer" class="updater-progress-container" hidden>
+              <div id="updaterProgressBar" class="updater-progress-bar"></div>
+            </div>
+            <span id="updaterStatusText"></span>
+            <div id="updaterReleaseNotes" class="updater-release-notes" hidden></div>
+            <button id="downloadUpdateButton" type="button" hidden>Baixar atualização</button>
+            <button id="installUpdateButton" type="button" class="primary" hidden>Instalar e reiniciar</button>
+          </div>
+        </section>
+        <footer>
+          <button id="aboutCloseButton" type="submit" value="close" class="primary">Fechar</button>
+        </footer>
+      </form>
+    </dialog>
+
+    <script type="module" src="./bundle.js"></script>
+  </body>
+</html>
