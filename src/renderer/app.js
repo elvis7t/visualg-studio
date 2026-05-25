@@ -25,6 +25,7 @@ import {
   createPanelResizer,
 } from "./panel-resizer.js";
 import { createThemeController } from "./theme.js";
+import { clearReleaseNotes, renderReleaseNotes } from "./updater-view.js";
 import { createInterpreterWorkerClient } from "./worker-client.js";
 
 function getTodayPtBr() {
@@ -775,10 +776,7 @@ function initAutoUpdater() {
   checkBtn.addEventListener("click", async () => {
     checkBtn.disabled = true;
     statusText.textContent = "Verificando atualizações...";
-    if (notesContainer) {
-      notesContainer.hidden = true;
-      notesContainer.innerHTML = "";
-    }
+    clearReleaseNotes(notesContainer);
     const res = await globalThis.visualg.updater.check();
     checkBtn.disabled = false;
     if (!res.success) {
@@ -809,47 +807,21 @@ function initAutoUpdater() {
         downloadBtn.hidden = true;
         installBtn.hidden = true;
         progressContainer.hidden = true;
-        if (notesContainer) {
-          notesContainer.hidden = true;
-          notesContainer.innerHTML = "";
-        }
+        clearReleaseNotes(notesContainer);
         break;
       case "available":
         statusText.textContent = `Nova versão disponível: v${status.info.version}`;
         downloadBtn.hidden = false;
         installBtn.hidden = true;
         progressContainer.hidden = true;
-        if (notesContainer) {
-          let notesHtml = "";
-          if (status.info.releaseName) {
-            notesHtml += `<div class="updater-release-title" style="font-weight: 600; color: var(--cyan); margin-bottom: 6px;">${status.info.releaseName}</div>`;
-          }
-          if (status.info.releaseNotes) {
-            if (Array.isArray(status.info.releaseNotes)) {
-              notesHtml += status.info.releaseNotes
-                .map(note => `<div style="margin-bottom: 8px;"><strong>v${note.version}</strong>:<br>${note.note}</div>`)
-                .join('');
-            } else {
-              notesHtml += `<div style="opacity: 0.9;">${status.info.releaseNotes}</div>`;
-            }
-          }
-          if (notesHtml) {
-            notesContainer.innerHTML = notesHtml;
-            notesContainer.hidden = false;
-          } else {
-            notesContainer.hidden = true;
-          }
-        }
+        renderReleaseNotes(notesContainer, status.info);
         break;
       case "not-available":
         statusText.textContent = "Você já possui a versão mais recente instalada.";
         downloadBtn.hidden = true;
         installBtn.hidden = true;
         progressContainer.hidden = true;
-        if (notesContainer) {
-          notesContainer.hidden = true;
-          notesContainer.innerHTML = "";
-        }
+        clearReleaseNotes(notesContainer);
         break;
       case "downloading":
         {
@@ -872,10 +844,7 @@ function initAutoUpdater() {
         downloadBtn.hidden = true;
         installBtn.hidden = true;
         progressContainer.hidden = true;
-        if (notesContainer) {
-          notesContainer.hidden = true;
-          notesContainer.innerHTML = "";
-        }
+        clearReleaseNotes(notesContainer);
         break;
       default:
         break;

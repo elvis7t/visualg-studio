@@ -8,7 +8,7 @@
     <title>VisuAlg Studio | A IDE Moderna para Algoritmos em Portugol</title>
     <meta
       name="description"
-      content="VisuAlg Studio é uma reconstrução desktop moderna do Visualg em Electron e Node.js. Uma IDE rápida, leve e com realce de sintaxe, depuração interativa, autocomplete, métricas de complexidade, Web Worker para execução/depuração e geração automática de fluxogramas."
+      content="VisuAlg Studio é uma reconstrução desktop moderna do Visualg em Electron e Node.js. Uma IDE rápida, leve e com realce de sintaxe, depuração interativa, autocomplete, métricas de complexidade, Web Worker para execução/depuração, fluxogramas e atualizações via GitHub Releases."
     />
     <meta
       name="keywords"
@@ -29,7 +29,7 @@
     />
     <meta
       property="og:description"
-      content="Escreva, execute e depure algoritmos em Portugol com uma interface moderna baseada em Electron. CodeMirror 6, temas Dracula/Dark, depuração interativa, métricas de complexidade, Worker de execução/depuração e fluxograma automático."
+      content="Escreva, execute e depure algoritmos em Portugol com uma interface moderna baseada em Electron. CodeMirror 6, temas Dracula/Dark, depuração interativa, métricas de complexidade, Worker, fluxograma automático e releases para Windows/Linux."
     />
     <meta
       property="og:image"
@@ -48,7 +48,7 @@
     />
     <meta
       property="twitter:description"
-      content="Escreva, execute e depure algoritmos em Portugol com uma interface moderna baseada em Electron. CodeMirror 6, temas Dracula/Dark, depuração interativa, métricas de complexidade, Worker de execução/depuração e fluxograma automático."
+      content="Escreva, execute e depure algoritmos em Portugol com uma interface moderna baseada em Electron. CodeMirror 6, temas Dracula/Dark, depuração interativa, métricas de complexidade, Worker, fluxograma automático e releases para Windows/Linux."
     />
     <meta
       property="twitter:image"
@@ -2421,6 +2421,15 @@ Digite um número:
               práticas de escrita e eficiência.
             </p>
           </div>
+          <div class="feature-card" id="feat-updates">
+            <i class="fa-solid fa-cloud-arrow-down feature-icon"></i>
+            <h3>Atualizações pelo GitHub</h3>
+            <p>
+              Releases públicas com instalador Windows, pacotes Linux,
+              checksums SHA-256 e metadados para auto-update diretamente pela
+              tela Sobre do aplicativo.
+            </p>
+          </div>
         </div>
       </section>
 
@@ -2476,6 +2485,17 @@ Digite um número:
                     Apoio ao aprendizado de ciência da computação com cálculo de
                     caminhos lógicos (complexidade ciclomática) e estimativas
                     Big O (com suporte a anotações personalizadas).
+                  </p>
+                </div>
+              </li>
+              <li>
+                <i class="fa-solid fa-circle-check"></i>
+                <div>
+                  <h4>Distribuição e Atualização Simples</h4>
+                  <p>
+                    Builds para Windows e Linux são publicados no GitHub
+                    Releases com checksums e metadados usados pelo auto-updater
+                    integrado ao app.
                   </p>
                 </div>
               </li>

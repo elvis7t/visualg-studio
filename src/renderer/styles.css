@@ -2107,3 +2107,14 @@ body[data-indent-guides="on"] .cm-content {
   font-family: monospace;
 }
 
+.updater-release-title {
+  color: var(--cyan);
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.updater-release-note {
+  margin-bottom: 8px;
+  opacity: 0.92;
+  white-space: pre-wrap;
+}

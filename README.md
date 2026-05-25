@@ -1,208 +1,167 @@
 # VisuAlg Studio
 
-VisuAlg Studio e uma reconstrução desktop moderna do Visualg, feita em Electron e Node.js. O objetivo do projeto e oferecer uma IDE leve para escrever, executar e depurar algoritmos `.alg`, mantendo compatibilidade progressiva com a linguagem Visualg e uma experiencia visual mais atual.
+<p align="center">
+  <img src="resources/icon.png" alt="VisuAlg Studio Logo" width="128" height="128" />
+</p>
 
-## Visao Geral
+<p align="center">
+  <strong>Uma IDE moderna, rápida e intuitiva para o aprendizado de algoritmos em Portugol.</strong>
+</p>
 
-O app entrega uma interface desktop com tema escuro, editor com numeração de linhas, autocomplete, destaque de sintaxe, busca/substituição, console de execução, entrada por modal para `leia(...)`, painel de depuração por etapa e empacotamento para Windows.
+<p align="center">
+  <a href="https://github.com/elvis7t/visualg-studio/releases">
+    <img src="https://img.shields.io/github/v/release/elvis7t/visualg-studio?logo=github&color=007acc" alt="Versão Recente" />
+  </a>
+  <a href="https://github.com/elvis7t/visualg-studio/actions/workflows/ci.yml">
+    <img src="https://img.shields.io/github/actions/workflow/status/elvis7t/visualg-studio/ci.yml?branch=main&logo=github-actions&label=CI" alt="Status do CI Build" />
+  </a>
+  <a href="https://github.com/elvis7t/visualg-studio/releases">
+    <img src="https://img.shields.io/github/downloads/elvis7t/visualg-studio/total?logo=github&color=44cc11" alt="Total de Downloads" />
+  </a>
+  <a href="https://github.com/elvis7t/visualg-studio">
+    <img src="https://api.visitorbadge.io/api/visitors?path=elvis7t.visualg-studio&label=views&labelColor=%23555555&countColor=%23007acc&style=flat&labelStyle=lower" alt="Total de visualizações" />
+  </a>
+  <a href="LICENSE">
+    <img src="https://img.shields.io/github/license/elvis7t/visualg-studio?color=orange" alt="Licença MIT" />
+  </a>
+</p>
 
-O interpretador roda localmente em Node.js. Execução e depuração tentam usar um Web Worker para evitar bloquear a UI; comandos `leia(...)` são atendidos por uma ponte assíncrona com o mesmo modal da interface. A distribuição original do Visualg não e modificada; os exemplos e recursos usados pelo app ficam dentro deste projeto.
+---
 
-## Funcionalidades
+VisuAlg Studio é uma reconstrução desktop moderna do clássico Visualg, desenvolvida em **Electron** e **Node.js**. O objetivo do projeto é oferecer uma experiência de desenvolvimento leve, estável e visualmente agradável para escrever, executar e depurar algoritmos `.alg`, mantendo compatibilidade progressiva com a linguagem Visualg tradicional.
 
-- Editor baseado em CodeMirror 6.
-- Numeração de linhas e linha ativa.
-- Autocomplete de comandos Visualg e variáveis declaradas no bloco `var`.
-- Temas: Dracula, Dark e Visual Assist Dark.
-- Painel de configurações integrado na barra lateral de atividades (acessível via ícone de engrenagem).
-- Configurações de tema, posição dos painéis, fontes e tamanhos, tabulação, quebra de linha, guias de indentação e detecção de loop infinito.
-- Abas de editor com persistência da sessão, indicador de alteração não salva e atalhos de navegação.
-- Execução e depuração de algoritmos `.alg`, com ponte para Web Worker e fallback direto quando o Worker não estiver disponível.
-- Campo `Entrada para leia` com múltiplas linhas e modal interativo quando a execução chegar em `leia(...)` sem valor pré-preenchido.
-- Console com botão para limpar saída, entrada e depuração.
-- Depuração por etapa com voltar, próximo, continuar até ponto de parada/fim, parar, pontos de parada na margem, Inspeção de expressão, tabela de variáveis com tipo e destaque da linha atual no editor.
-- Painéis redimensionáveis entre editor, console e depuração, incluindo largura dos detalhes da depuração.
-- Busca e substituição no editor.
-- Exportação do código atual para `.alg`/`.txt` e impressão do algoritmo pelo painel de Ferramentas na barra lateral.
-- Fluxograma automático do algoritmo atual, gerado a partir do AST do interpretador, com zoom/pan interativos e exportação completa para SVG e PNG.
-- Documentação interna em seções sanfonadas na barra lateral: Linguagem, Editor, Depuração e Atalhos.
-- Painel de Dicas dedicado na barra lateral de atividades.
-- Tela Sobre (versão, licença e créditos/homenagem ao legado do Visualg) acessível via ícone de informações na barra lateral.
-- Exemplos internos carregados no painel do Explorador na barra lateral por categoria.
-- Atualizações automáticas integradas com o GitHub Releases via auto-updater (disponível na tela Sobre).
-- Geração de executável e instalador Windows e Linux via `electron-builder`.
+> [!IMPORTANT]
+> **Nota de Isenção de Responsabilidade:** Este é um projeto **independente e não oficial**, sem qualquer vínculo com os mantenedores ou autores originais do software VisuAlg. Ele foi criado como uma homenagem ao legado educacional da ferramenta e para modernizar o ecossistema de aprendizado de Portugol.
 
-## Compatibilidade Atual da Linguagem
+---
 
-Suporte implementado:
+## 🚀 Instalação Rápida
 
-- `algoritmo`, `var`, `inicio`, `fimalgoritmo`.
-- Tipos `inteiro`, `real`, `caracter`/`caractere`, `logico`.
-- `vetor[1..N] de tipo` e matrizes com múltiplas dimensões.
-- Atribuição com `<-` e `:=`.
-- `escreva`, `escreval`, `leia`.
-- `se`, `senao`, `fimse`.
-- `para`, `fimpara`.
-- `enquanto`, `fimenquanto`.
-- `repita ... ate`.
-- `escolha`, `caso`, `outrocaso`, `fimescolha`.
-- Ranges em `caso`, como `caso 1..5`.
-- `interrompa`.
-- Operadores aritméticos, lógicos e comparativos básicos.
-- `limpatela`.
-- `pausa`, `eco on/off`, `timer on/off`, `cronometro` e `aleatorio on/off` ou `aleatorio minimo,maximo`.
-- Formatação básica em `escreva`/`escreval`, como `valor:6:2`.
-- Múltiplos comandos simples na mesma linha separados por `;`.
-- Funções nativas como `abs`, `raizq`, `sen`, `cos`, `tan`, `arcsen`, `arccos`, `arctan`, `cotan`, `int`, `quad`, `exp`, `log`, `logn`, `pi`, `grauprad`, `radpgrau`, `rand`, `randi`, `compr`, `maiusc`, `minusc`, `copia`, `pos`, `asc`, `carac`, `caracpnum`, `numpcarac`.
-- Subprogramas com `procedimento`/`fimprocedimento` e `funcao`/`fimfuncao`.
-- Parametros por valor, parametros por referencia com `var` para variaveis simples, itens de vetor e vetores completos, variaveis locais de subprograma, recursao e retorno com `retorne`.
-- Validação de tipos desconhecidos nas declarações.
+As versões compiladas e prontas para uso estão disponíveis na aba **[Releases](https://github.com/elvis7t/visualg-studio/releases)** do repositório.
 
-## Depuração
+| Plataforma | Artefato | Uso recomendado |
+| --- | --- | --- |
+| Windows | `VisuAlg Studio Setup X.Y.Z.exe` | Instalador padrão |
+| Windows | `VisuAlg-Studio-Portable-Windows.zip` | Versão portátil |
+| Linux | `VisuAlg Studio-X.Y.Z.AppImage` | Execução direta na maioria das distribuições |
+| Linux | `visualg-studio_X.Y.Z_amd64.deb` | Instalação em Debian/Ubuntu |
+| Verificação | `SHA256SUMS.txt` | Conferência de integridade dos arquivos |
 
-A depuração atual usa um executor pausável: o algoritmo avança sob demanda, `Próximo` resume a execução até o próximo passo e `Voltar` navega pelos passos já visitados. O passo selecionado destaca a linha correspondente no editor e atualiza o console com a saída acumulada ate o momento. Quando a execução encontra `leia(...)`, valores do campo `Entrada para leia` são consumidos primeiro; se faltarem valores, o Worker solicita a entrada para a UI e o app mostra o modal naquele momento da depuração.
+---
 
-O modelo antigo de trace completo ainda existe como API headless (`createDebugSession`) para testes, automações e fallback técnico, mas a interface principal já usa a sessão interativa (`createInteractiveDebugSession`). Limitações atuais:
+## ✨ Funcionalidades Principais
 
-- Step-into dedicado para subprogramas ainda não tem comando separado.
-- Pontos de parada ainda são marcados por linha e não são persistidos entre sessões.
+* **Editor Premium:** Baseado em CodeMirror 6, com numeração de linhas, realce de linha ativa, guias de indentação inteligentes e busca/substituição integradas.
+* **IntelliSense/Autocomplete:** Sugestões inteligentes para comandos do Visualg e variáveis declaradas no bloco `var`.
+* **Temas Modernos:** Suporte a temas escuros como Dracula, Dark e Visual Assist Dark.
+* **Depuração Interativa Avançada:** Depure seus algoritmos passo a passo com comandos de `Avançar`, `Voltar` (histórico de execução), continuar até pontos de parada (breakpoints) e reiniciar.
+* **Inspeção de Expressões:** Avalie expressões dinamicamente em tempo de execução (ex: `baixo + alto` ou `vetor[i]`).
+* **Geração de Fluxogramas:** Visualize seu algoritmo automaticamente em forma de fluxograma interativo (com zoom e pan) e exporte para SVG ou PNG.
+* **Documentação & Dicas:** Guias integrados de atalhos, comandos da linguagem e painel interativo de ajuda na barra lateral.
+* **Atualizações Automáticas:** Verifique e baixe novas versões do aplicativo diretamente pela tela *Sobre* (integrado ao GitHub Releases via auto-updater).
 
-## Atalhos
+---
 
-- `Ctrl+N`: novo arquivo.
-- `Ctrl+O`: abrir arquivo.
-- `Ctrl+S`: salvar arquivo.
-- `Ctrl+Z`: desfazer.
-- `Ctrl+Y` ou `Ctrl+Shift+Z`: refazer.
-- `Ctrl+D`: duplicar linha.
-- `Ctrl+F`: buscar no editor.
-- `Ctrl+H`: buscar e substituir.
-- `Alt+Shift+F`: indentar o algoritmo.
-- `Ctrl+W`: fechar aba ativa.
-- `Ctrl+Tab`: próxima aba.
-- `Ctrl+Shift+Tab`: aba anterior.
-- `F9`: executar.
-- `F5`: iniciar depuração.
-- `F8`: avançar passo na depuração.
-- `Shift+F8`: voltar passo na depuração.
-- Clique no número da linha: marcar/remover ponto de parada.
-- Campo `Inspeção` no painel de depuração: avaliar expressões no passo atual, como `baixo + alto` ou `notas[meio]`.
-- Botão `Continuar`: executa até o próximo ponto de parada posterior ou até o fim do algoritmo.
-- Botões `Ponto de parada anterior` e `Próximo ponto de parada`: saltar entre pontos de parada marcados já visitados sem trocar o comportamento passo a passo de `Voltar` e `Próximo`.
-- `Limpeza`: limpa console, entrada e depuração; as vassouras locais limpam apenas o painel onde aparecem.
+## ⚙️ Compatibilidade da Linguagem
 
-## Roadmap de Compatibilidade
+A IDE possui um interpretador próprio desenvolvido em Node.js com suporte a:
 
-Itens importantes ainda pendentes:
+* **Estrutura básica:** `algoritmo`, `var`, `inicio`, `fimalgoritmo`.
+* **Tipos de dados:** `inteiro`, `real`, `caracter`/`caractere`, `logico`.
+* **Estruturas de dados:** `vetor[1..N] de tipo` e matrizes multidimensionais.
+* **Atribuições e operadores:** Suporte a `<-` e `:=`, além de operadores aritméticos, lógicos e relacionais.
+* **Entrada e saída:** `escreva`, `escreval` (com formatação de casas decimais como `valor:6:2`) e `leia` (com modal interativo).
+* **Estruturas de controle:** `se/senao`, `para/ate/passo`, `enquanto`, `repita/ate` e `escolha/caso/outrocaso`.
+* **Modularização:** `procedimento` e `funcao` com parâmetros por valor e referência (`var`), recursão e retorno com `retorne`.
+* **Funções nativas:** Funções matemáticas (`abs`, `raizq`, `sen`, `cos`, `tan`, `log`, `rand`, etc.) e manipulação de strings (`compr`, `maiusc`, `copia`, `pos`, `caracpnum`, etc.).
+* **Controles especiais:** `limpatela`, `pausa`, `timer`, `cronometro`, `aleatorio` e `eco`.
 
-- Step-into para subprogramas.
-- Layout avançado do fluxograma com ramificações em colunas.
+---
 
-Importante: a declaração de vetor cria a estrutura com valores padrão, mas não preenche uma sequência automaticamente. Para preencher `notas[1]` ate `notas[10]`, use um laço:
+## 🗺️ Roadmap e Status do Projeto
 
-```visualg
-para i de 1 ate 10 faca
-  notas[i] <- i
-fimpara
-```
+Abaixo estão os marcos técnicos e o status atual do desenvolvimento:
 
-## Estrutura do Projeto
+- [x] Execução de algoritmos em ambiente isolado (Web Worker)
+- [x] Depurador interativo com avanço, retrocesso e breakpoints
+- [x] Inspeção de variáveis e expressões em tempo de execução
+- [x] Geração automática de fluxograma interativo
+- [x] Atualizações automáticas integradas
+- [ ] Step-into dedicado para subprogramas (funções e procedimentos)
+- [ ] Layout avançado do fluxograma com tratamento de desvios em colunas
+- [ ] Persistência de breakpoints entre sessões de uso
+
+---
+
+## 🛠️ Desenvolvimento e Contribuição
+
+Se deseja contribuir ou testar as alterações no código localmente:
+
+### Pré-requisitos
+* Node.js (v20 ou superior)
+* NPM
+
+### Como rodar localmente
+1. Instale as dependências a partir do lockfile:
+   ```bash
+   npm ci
+   ```
+2. Inicie o aplicativo em modo de desenvolvimento:
+   ```bash
+   npm start
+   ```
+
+### Scripts úteis
+* **Verificar código (Testes e Sintaxe):** `npm run verify`
+* **Testes unitários:** `npm test`
+* **Executar cobertura de testes:** `npm run test:coverage`
+* **Gerar bundle do renderer:** `npm run build:renderer`
+* **Gerar ZIP portátil para Windows:** `npm run portable:win`
+* **Compilar instalador para Windows:** `npm run dist:win`
+* **Compilar pacotes para Linux:** `npm run dist:linux`
+
+Para diretrizes detalhadas de estilo de código, fluxo de trabalho e abertura de Pull Requests, consulte o nosso **[Guia de Contribuição (CONTRIBUTING.md)](CONTRIBUTING.md)**. Todos os colaboradores devem seguir o nosso **[Código de Conduta (CODE_OF_CONDUCT.md)](CODE_OF_CONDUCT.md)**.
+
+---
+
+## 📂 Estrutura do Projeto
 
 ```text
 .
-├── docs/
-│   ├── adrs/          # Architecture Decision Records
-│   ├── operation/     # Guias operacionais com comandos copiáveis
-│   └── superpowers/   # Specs e planos usados durante o desenvolvimento
-├── examples/          # Exemplos .alg carregados pela interface
-├── resources/         # Icones e identidade visual
-├── scripts/           # Scripts auxiliares
+├── .github/           # Workflows do GitHub Actions (CI/CD)
+├── docs/              # Documentação operacional, specs e ADRs
+├── examples/          # Algoritmos de exemplo carregados pela interface
+├── resources/         # Ícones do app e identidade visual
+├── scripts/           # Scripts de compilação e verificação de sintaxe
 ├── src/
-│   ├── interpreter/   # Parser, runtime e API do interpretador
-│   ├── main/          # Processo main do Electron e preload
-│   └── renderer/      # UI, editor, tema, arquivos e paineis
-└── test/              # Testes automatizados
+│   ├── interpreter/   # Parser, runtime e interpretador do Portugol
+│   ├── main/          # Processo principal do Electron
+│   └── renderer/      # Interface gráfica (HTML/CSS/JS) e editor
+└── test/              # Suíte de testes automatizados
 ```
 
-## Documentação Operacional
+Para mais detalhes sobre as decisões técnicas tomadas, você pode ler as nossas **[Decisões de Arquitetura (ADRs)](docs/adrs)**.
 
-Os comandos do dia a dia ficam em [docs/operation/commands.md](docs/operation/commands.md).
+---
 
-Guias disponíveis:
+## 📄 Licença
 
-- [Comandos do Projeto](docs/operation/commands.md)
-- [Build e Distribuicao](docs/operation/build-and-release.md)
-- [Troubleshooting](docs/operation/troubleshooting.md)
+Este projeto está licenciado sob a **[MIT License](LICENSE)**.
 
-## Decisoes de Arquitetura
+---
 
-As decisões arquiteturais ficam em [docs/adrs](docs/adrs).
+## 💖 Créditos e Homenagem
 
-ADRs iniciais:
+Este projeto é uma iniciativa independente e não possui vínculo direto com os criadores originais do software legado. Ele nasce como uma profunda homenagem ao impacto educacional do ecossistema Visualg:
 
-- [ADR 0001 - Electron como shell desktop](docs/adrs/0001-electron-desktop-shell.md)
-- [ADR 0002 - Interpretador proprio em Node.js](docs/adrs/0002-node-visualg-interpreter.md)
-- [ADR 0003 - CodeMirror 6 como editor](docs/adrs/0003-codemirror-editor.md)
-- [ADR 0004 - Electron Builder para distribuicao Windows](docs/adrs/0004-electron-builder-windows-distribution.md)
-- [ADR 0005 - Busca/substituicao customizada no editor](docs/adrs/0005-custom-search-panel.md)
-- [ADR 0006 - Configuracoes em localStorage sem schema versionado](docs/adrs/0006-local-storage-settings.md)
-- [ADR 0007 - Sessao de depuracao interativa](docs/adrs/0007-interactive-debug-session.md)
-- [ADR 0008 - Interpretador em Web Worker](docs/adrs/0008-interpreter-web-worker.md)
+*   O **Visualg** original foi idealizado e criado pelo professor **Claudio Morgado**.
+*   Posteriormente, o projeto foi mantido, promovido e ampliado pelo professor **Antonio Carlos Nicolodi**.
 
-## Desenvolvimento Rapido
+O **VisuAlg Studio** busca perpetuar esse legado facilitando o ensino de lógica para novas gerações de desenvolvedores com ferramentas de desenvolvimento contemporâneas.
 
-Instale dependências:
 
-```powershell
-npm install
-```
+---
 
-Inicie o app:
-
-```powershell
-npm start
-```
-
-Rode a verificação completa:
-
-```powershell
-npm run verify
-```
-
-Gere o executável Windows:
-
-```powershell
-npm run pack:win
-```
-
-Gere o instalador Windows:
-
-```powershell
-npm run dist:win
-```
-
-## Artefatos Gerados
-
-Depois do build, os principais artefatos ficam em:
-
-```text
-dist/win-unpacked/VisuAlg Studio.exe
-dist/VisuAlg Studio Setup 0.1.0.exe
-```
-
-## Status
-
-Este projeto ainda está em evolução. A prioridade atual e ampliar compatibilidade com a linguagem Visualg, manter o depurador interativo estável e consolidar a execução/depuração em Worker com fallback técnico para ambientes sem suporte.
-
-## Créditos e Homenagem
-
-Este projeto, **VisuAlg Studio**, é uma reescrita independente em Node.js e Electron, inspirada no legado do Visualg.
-
-- O Visualg original foi criado pelo professor **Claudio Morgado** e posteriormente promovido e mantido pelo professor **Antonio Carlos Nicolodi**, referência fundamental no ensino de algoritmos.
-- Este projeto não é oficial, mas presta homenagem a esses educadores que marcaram gerações de estudantes de programação.
-
-## Licença
-
-Este projeto está licenciado sob os termos da [MIT License](LICENSE).
-
-Inspirado e em homenagem aos professores Claudio Morgado e Antonio Carlos Nicolodi.
+<div align="center">
+  <p>⭐ Se este projeto te ajudou ou ajudará seus alunos, deixe uma estrela no repositório! Contribuições são sempre bem-vindas.</p>
+</div>

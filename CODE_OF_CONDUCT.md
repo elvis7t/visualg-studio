@@ -1,49 +1,84 @@
-# Código de Conduta do Pacto de Contribuintes
+# Codigo de Conduta
 
-## Nosso Compromisso
+## Nosso compromisso
 
-No interesse de promover um ambiente aberto e acolhedor, nós, como colaboradores e mantenedores, nos comprometemos a tornar a participação em nosso projeto e em nossa comunidade uma experiência livre de assédio para todos, independentemente da idade, tamanho corporal, deficiência visível ou invisível, etnia, características sexuais, identidade e expressão de gênero, nível de experiência, educação, status socioeconômico, nacionalidade, aparência pessoal, raça, casta, religião ou identidade e orientação sexual.
+Nos, como mantenedores e colaboradores do **VisuAlg Studio**, nos comprometemos a manter uma comunidade aberta, respeitosa e acolhedora.
 
-Prometemos agir e interagir de maneiras que contribuam para uma comunidade aberta, acolhedora, diversa, inclusiva e saudável.
+Este projeto tem foco educacional. Por isso, valorizamos um ambiente onde estudantes, professores, iniciantes e pessoas experientes possam aprender, perguntar, errar, corrigir e contribuir com seguranca.
 
----
+## Comportamentos esperados
 
-## Nossos Padrões
+Exemplos de comportamentos que ajudam a comunidade:
 
-Exemplos de comportamentos que contribuem para criar um ambiente positivo para a nossa comunidade incluem:
+- Tratar outras pessoas com respeito e empatia.
+- Dar feedback tecnico de forma clara, objetiva e construtiva.
+- Aceitar correcoes com maturidade.
+- Fazer perguntas de boa-fe.
+- Explicar decisoes tecnicas quando discordar de uma abordagem.
+- Ajudar iniciantes sem ironia ou constrangimento.
+- Manter discussoes focadas no projeto, no codigo e na experiencia do usuario.
 
-- Demonstrar empatia e bondade para com as outras pessoas.
-- Ser receptivo a opiniões, ideias e experiências divergentes.
-- Dar e aceitar feedbacks construtivos de maneira profissional.
-- Aceitar a responsabilidade e pedir desculpas àqueles afetados por nossos erros, aprendendo com a experiência.
-- Focar no que é melhor para a comunidade como um todo, não apenas em nós mesmos.
+## Comportamentos inaceitaveis
 
-Exemplos de comportamentos inaceitáveis incluem:
+Exemplos de comportamentos que nao serao aceitos:
 
-- O uso de linguagem ou imagens sexualizadas e atenção sexual indesejada de qualquer natureza.
-- Comentários ofensivos, discriminatórios ou de cunho político/pessoal (trolling).
-- Assédio público ou privado.
-- Publicar informações privadas de terceiros, como endereços físicos ou eletrônicos, sem permissão explícita.
-- Qualquer conduta que possa ser considerada inadequada em um ambiente profissional.
-
----
-
-## Responsabilidades de Aplicação
-
-Os mantenedores do projeto são responsáveis por esclarecer e aplicar nossos padrões de comportamento aceitável e tomarão medidas corretivas apropriadas e justas em resposta a qualquer comportamento que considerem inadequado, ameaçador, ofensivo ou prejudicial.
-
-Os mantenedores têm o direito e a responsabilidade de remover, editar ou rejeitar comentários, commits, códigos, edições de wiki, issues e outras contribuições que não estejam alinhadas com este Código de Conduta, e comunicarão os motivos das decisões de moderação quando apropriado.
-
----
+- Ataques pessoais, insultos ou humilhacao.
+- Assedio publico ou privado.
+- Linguagem discriminatoria, ofensiva ou sexualizada.
+- Comentarios preconceituosos sobre origem, genero, orientacao sexual, deficiencia, idade, religiao, aparencia, nacionalidade, nivel de experiencia ou classe social.
+- Publicacao de dados privados de terceiros sem consentimento.
+- Trolling, provocacoes repetidas ou interrupcoes deliberadas.
+- Pressao para aceitar contribuicoes fora do escopo ou sem revisao.
+- Qualquer conduta inadequada para um ambiente profissional e educacional.
 
 ## Escopo
 
-Este Código de Conduta aplica-se dentro de todos os espaços do projeto e também se aplica quando um indivíduo representa oficialmente o projeto ou sua comunidade em espaços públicos. Exemplos de representação do projeto incluem o uso de um endereço de e-mail oficial, postagens por meio de contas oficiais de mídia social ou atuação como representante nomeado em um evento online ou offline.
+Este Codigo de Conduta se aplica a todos os espacos do projeto, incluindo:
 
----
+- Issues.
+- Pull Requests.
+- Discussions.
+- Comentarios de review.
+- Documentacao.
+- Canais oficiais de comunicacao do projeto.
+- Interacoes publicas em que alguem esteja representando o projeto.
 
-## Aplicação
+## Responsabilidades dos mantenedores
 
-Instâncias de comportamento abusivo, de assédio ou de outra forma inaceitável podem ser relatadas aos mantenedores do projeto responsáveis pela aplicação. Todas as reclamações serão revisadas e investigadas de forma oportuna e justa.
+Os mantenedores sao responsaveis por:
 
-Todos os mantenedores do projeto têm a obrigação de respeitar a privacidade e a segurança dos relatores de qualquer incidente.
+- Esclarecer os padroes de comportamento esperados.
+- Moderar conversas quando necessario.
+- Remover, editar ou rejeitar comentarios, issues, Pull Requests ou contribuicoes que violem este codigo.
+- Aplicar medidas proporcionais ao contexto e a gravidade da situacao.
+
+As medidas podem incluir:
+
+- Aviso privado ou publico.
+- Encerramento de discussoes improdutivas.
+- Remocao de conteudo ofensivo.
+- Restricao temporaria de participacao.
+- Banimento permanente em casos graves ou repetidos.
+
+## Como reportar problemas
+
+Comportamentos inadequados podem ser reportados aos mantenedores do projeto.
+
+Ao reportar, inclua quando possivel:
+
+- Link da conversa, issue ou Pull Request.
+- Descricao objetiva do ocorrido.
+- Prints ou evidencias relevantes.
+- Indicao se voce precisa de confidencialidade.
+
+Todos os relatos serao analisados com respeito, discricao e cuidado.
+
+## Compromisso com boa-fe
+
+Nem toda discordancia tecnica e conflito de conduta.
+
+Debates sobre arquitetura, bugs, prioridades, testes e escopo sao bem-vindos quando feitos com respeito. O objetivo deste codigo nao e impedir opinioes fortes, mas garantir que elas sejam expressas de forma profissional e segura.
+
+## Atribuicao
+
+Este Codigo de Conduta e inspirado no Contributor Covenant, adaptado para a realidade do VisuAlg Studio e de sua comunidade educacional.

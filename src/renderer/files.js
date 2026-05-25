@@ -88,6 +88,16 @@ export function createFileController({ editor, fileLabel, tabsContainer, recentF
 
   function createTab(tab) {
     syncActiveContent();
+
+    if (tab.filePath) {
+      const normPath = normalizePath(tab.filePath);
+      const existing = tabs.find((t) => t.filePath && normalizePath(t.filePath) === normPath);
+      if (existing) {
+        activateTab(existing.id);
+        return;
+      }
+    }
+
     const id = nextId;
     nextId += 1;
     tabs.push({ id, ...tab });
@@ -219,13 +229,15 @@ export function createFileController({ editor, fileLabel, tabsContainer, recentF
   }
 
   function addRecentFile(filePath) {
-    const recent = [filePath, ...readRecentFiles().filter((item) => item !== filePath)].slice(0, 8);
+    const normPath = normalizePath(filePath);
+    const recent = [filePath, ...readRecentFiles().filter((item) => normalizePath(item) !== normPath)].slice(0, 8);
     localStorage.setItem(RECENTS_KEY, JSON.stringify(recent));
     renderRecentFiles();
   }
 
   function removeRecentFile(filePath) {
-    localStorage.setItem(RECENTS_KEY, JSON.stringify(readRecentFiles().filter((item) => item !== filePath)));
+    const normPath = normalizePath(filePath);
+    localStorage.setItem(RECENTS_KEY, JSON.stringify(readRecentFiles().filter((item) => normalizePath(item) !== normPath)));
     renderRecentFiles();
   }
 
@@ -335,4 +347,11 @@ function isDirty(tab) {
 
 function fileNameFromPath(filePath) {
   return filePath.split(/[\\/]/).at(-1) || filePath;
+}
+
+function normalizePath(filePath) {
+  if (typeof filePath !== 'string') return '';
+  const clean = filePath.replace(/\\/g, '/');
+  const isWindows = typeof navigator !== 'undefined' && /Win/.test(navigator.platform);
+  return isWindows ? clean.toLowerCase() : clean;
 }

@@ -1,80 +1,200 @@
-# Guia de Contribuição
+# Contribuindo com o VisuAlg Studio
 
-Obrigado por seu interesse em contribuir para o **VisuALg Studio**! Este projeto é uma iniciativa de código aberto para fornecer uma IDE moderna e amigável para o aprendizado de algoritmos em Portugol.
+Obrigado por considerar contribuir com o **VisuAlg Studio**.
 
-Para manter a qualidade e consistência do projeto, pedimos que siga as diretrizes abaixo.
+Este projeto e uma reescrita moderna e independente do Visualg em Node.js e Electron, com foco em ensino de algoritmos, compatibilidade com Portugol/Visualg e uma experiencia de IDE atual.
 
----
+## Como contribuir
 
-## Como Começar
+Voce pode ajudar de varias formas:
 
-### 1. Requisitos Prévios
-Certifique-se de ter instalado em sua máquina:
-- **Node.js** (versão 18 ou superior)
-- **NPM** (gerenciador de pacotes do Node)
-- **Git**
+- Reportando bugs.
+- Sugerindo melhorias de interface ou compatibilidade com Visualg.
+- Criando exemplos `.alg`.
+- Melhorando a documentacao.
+- Escrevendo testes.
+- Corrigindo problemas no interpretador, editor, depurador, fluxograma ou build.
 
-### 2. Configurando o Ambiente Local
-1. Faça o fork do repositório no GitHub.
-2. Clone o seu fork localmente:
-   ```bash
-   git clone https://github.com/SEU-USUARIO/visualg-studio.git
-   cd visualg-studio
-   ```
-3. Instale as dependências:
-   ```bash
-   npm install
-   ```
-4. Inicie o aplicativo em modo de desenvolvimento:
-   ```bash
-   npm start
-   ```
+Antes de abrir uma mudanca grande, prefira criar uma issue ou comentar em uma issue existente para alinhar o escopo.
 
----
+## Preparando o ambiente
 
-## Diretrizes de Desenvolvimento
+Requisitos recomendados:
 
-### Estilo de Código
-- Escreva código em **JavaScript puro (Vanilla JS)**.
-- Utilize **módulos ES** (`import`/`export`) para manter a compatibilidade com a arquitetura atual.
-- Mantenha o padrão de formatação e nomes consistentes com o código existente.
+- Node.js 20 ou superior.
+- npm.
+- Git.
 
-### Testes Automatizados
-Antes de propor qualquer alteração, certifique-se de que a suíte de testes do interpretador continua passando:
+Instale as dependencias:
+
+```bash
+npm install
+```
+
+Execute o app localmente:
+
+```bash
+npm start
+```
+
+## Comandos uteis
+
+Rodar testes:
+
 ```bash
 npm test
 ```
 
-Para verificar se não há erros de sintaxe nos arquivos principais:
+Rodar testes com cobertura:
+
 ```bash
-npm run check
+npm run test:coverage
 ```
 
-Você também pode executar ambos em um único comando:
+Validar testes e sintaxe:
+
 ```bash
 npm run verify
 ```
 
----
+Gerar bundle do renderer:
 
-## Enviando um Pull Request (PR)
+```bash
+npm run build:renderer
+```
 
-1. Crie uma branch para a sua modificação:
-   ```bash
-   git checkout -b minha-melhoria
-   ```
-2. Realize as alterações e adicione testes correspondentes se modificar a lógica do interpretador.
-3. Faça commit das alterações com mensagens claras e objetivas.
-4. Faça o push para a branch no seu fork:
-   ```bash
-   git push origin minha-melhoria
-   ```
-5. Abra o Pull Request apontando para a branch `main` do repositório original.
-6. Preencha o template de PR detalhando as modificações e os testes realizados.
+Gerar app empacotado:
 
----
+```bash
+npm run pack
+```
 
-## Reportando Problemas ou Sugestões
-Se você encontrar um erro ou tiver uma sugestão de melhoria (como suporte a um comando adicional da sintaxe do Visualg):
-- Verifique se o problema já não foi relatado nas [Issues](https://github.com/elvis7t/visualg-studio/issues).
-- Se for novo, abra uma nova issue utilizando o template apropriado (**Bug Report** ou **Feature Request**).
+Gerar instalador Windows:
+
+```bash
+npm run dist:win
+```
+
+Gerar pacotes Linux:
+
+```bash
+npm run dist:linux
+```
+
+## Estrutura do projeto
+
+- `src/interpreter/`: tokenizer, parser, runtime, depurador, metricas e fluxograma.
+- `src/main/`: processo principal do Electron, preload, IPC e atualizador.
+- `src/renderer/`: interface, editor, paineis, dialogs e cliente Worker.
+- `examples/`: exemplos Visualg distribuidos com o app.
+- `docs/`: documentacao, ADRs, operacao e site estatico.
+- `test/`: testes com `node --test`.
+- `resources/`: icones e recursos de build.
+
+## Padroes de codigo
+
+- Use JavaScript moderno com ES modules.
+- Prefira funcoes pequenas e modulos focados.
+- Preserve a separacao entre interpretador, main process e renderer.
+- Evite misturar DOM/Electron dentro de `src/interpreter/`.
+- Adicione testes para mudancas no interpretador, Worker, depurador e regras de linguagem.
+- Para alteracoes no renderer, rode `npm run build:renderer` quando necessario.
+- Nao edite `dist/` manualmente.
+
+## Interpretador e compatibilidade Visualg
+
+Ao mexer em comandos, tipos, funcoes nativas ou regras de sintaxe:
+
+1. Adicione ou atualize testes em `test/`.
+2. Inclua pelo menos um exemplo `.alg` quando a funcionalidade for didatica.
+3. Atualize a documentacao se o comportamento for visivel para o usuario.
+4. Mantenha mensagens de erro claras e, sempre que possivel, com numero de linha.
+
+## Interface e experiencia
+
+Ao alterar a UI:
+
+- Mantenha o tema escuro atual e a identidade do VisuAlg Studio.
+- Preserve responsividade dos paineis.
+- Evite quebrar o fluxo principal: editar, executar, depurar e ver saida.
+- Use nomes em portugues na interface.
+- Prefira icones semanticamente claros.
+
+## Fluxo recomendado para Pull Requests
+
+1. Crie uma branch com nome objetivo:
+
+```bash
+git checkout -b feature/nome-da-melhoria
+```
+
+2. Faca commits pequenos e claros.
+
+3. Rode a verificacao:
+
+```bash
+npm run verify
+```
+
+4. Se mexeu na UI, gere o bundle:
+
+```bash
+npm run build:renderer
+```
+
+5. Abra o Pull Request explicando:
+
+- O que mudou.
+- Por que mudou.
+- Como testar.
+- Prints ou GIFs, quando for mudanca visual.
+- Issues relacionadas, se houver.
+
+## Checklist antes de enviar PR
+
+- [ ] O codigo esta focado no escopo da mudanca.
+- [ ] `npm run verify` passa localmente.
+- [ ] Testes foram adicionados ou atualizados quando necessario.
+- [ ] A documentacao foi atualizada quando a mudanca afeta o usuario.
+- [ ] O bundle do renderer foi atualizado se `src/renderer/` foi alterado.
+- [ ] Nenhum arquivo gerado em `dist/` foi commitado por engano.
+
+## Reportando bugs
+
+Ao abrir uma issue de bug, inclua:
+
+- Versao do VisuAlg Studio.
+- Sistema operacional.
+- Codigo `.alg` minimo que reproduz o problema.
+- Resultado esperado.
+- Resultado obtido.
+- Prints, logs ou mensagem de erro.
+
+## Sugerindo funcionalidades
+
+Ao sugerir uma funcionalidade, descreva:
+
+- Qual problema ela resolve.
+- Como o Visualg original se comporta, se for uma questao de compatibilidade.
+- Como voce imagina a experiencia na UI.
+- Se e essencial para ensino ou apenas melhoria de conveniencia.
+
+## Releases
+
+As releases sao publicadas pelo GitHub Releases e usam os metadados do `electron-builder` para atualizacao automatica.
+
+Mudancas relacionadas a release devem considerar:
+
+- Windows: instalador NSIS.
+- Linux: AppImage e `.deb`.
+- Arquivos `latest.yml` e `latest-linux.yml`.
+- Checksums SHA-256.
+- Teste de instalacao e atualizacao.
+
+## Codigo de Conduta
+
+Todas as contribuicoes devem seguir o [Codigo de Conduta](CODE_OF_CONDUCT.md).
+
+## Licenca
+
+Ao contribuir, voce concorda que sua contribuicao sera distribuida sob os termos da licenca MIT do projeto.

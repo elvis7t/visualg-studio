@@ -40,9 +40,7 @@ jobs:
 
       - name: Create Portable Zip (Windows)
         if: matrix.os == 'windows-latest'
-        run: |
-          Compress-Archive -Path dist/win-unpacked/* -DestinationPath dist/VisuAlg-Studio-Portable-Windows.zip -Force
-        shell: powershell
+        run: npm run zip:portable:win
 
       - name: Upload Windows Artifacts
         if: matrix.os == 'windows-latest'

@@ -25,6 +25,8 @@
     "build:renderer": "esbuild src/renderer/app.js --bundle --format=esm --outfile=src/renderer/bundle.js",
     "pack": "npm run build:renderer && electron-builder --dir",
     "pack:win": "npm run build:renderer && electron-builder --win --dir",
+    "zip:portable:win": "powershell -NoProfile -ExecutionPolicy Bypass -Command \"Compress-Archive -Path 'dist/win-unpacked/*' -DestinationPath 'dist/VisuAlg-Studio-Portable-Windows.zip' -Force\"",
+    "portable:win": "npm run pack:win && npm run zip:portable:win",
     "dist": "npm run build:renderer && electron-builder",
     "dist:win": "npm run build:renderer && electron-builder --win",
     "dist:linux": "npm run build:renderer && electron-builder --linux",
@@ -32,7 +34,8 @@
     "check": "node scripts/check-syntax.js",
     "verify": "npm test && npm run check",
     "test": "node --test",
-    "test:watch": "node --test --watch"
+    "test:watch": "node --test --watch",
+    "test:coverage": "node --test --experimental-test-coverage"
   },
   "build": {
     "appId": "br.com.visualg.studio",
