@@ -92,8 +92,8 @@ Abaixo estão os marcos técnicos e o status atual do desenvolvimento:
 - [x] Inspeção de variáveis e expressões em tempo de execução
 - [x] Geração automática de fluxograma interativo
 - [x] Atualizações automáticas integradas
+- [x] Layout avançado do fluxograma com tratamento de desvios em colunas
 - [ ] Step-into dedicado para subprogramas (funções e procedimentos)
-- [ ] Layout avançado do fluxograma com tratamento de desvios em colunas
 - [ ] Persistência de breakpoints entre sessões de uso
 
 ---
@@ -170,3 +170,6 @@ O **VisuAlg Studio** busca perpetuar esse legado facilitando o ensino de lógica
 <div align="center">
   <p>⭐ Se este projeto te ajudou ou ajudará seus alunos, deixe uma estrela no repositório! Contribuições são sempre bem-vindas.</p>
 </div>
+
+---
+⌨️ with ❤️ by [Elvis Leite](https://gist.github.com/elvis7t) 😊
