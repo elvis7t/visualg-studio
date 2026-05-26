@@ -8,17 +8,15 @@
     <title>VisuAlg Studio | A IDE Moderna para Algoritmos em Portugol</title>
     <meta
       name="description"
-      content="VisuAlg Studio é uma reconstrução desktop moderna do Visualg em Electron e Node.js. Uma IDE rápida, leve e com realce de sintaxe, depuração interativa, autocomplete, métricas de complexidade, Web Worker para execução/depuração, fluxogramas e atualizações via GitHub Releases."
-    />
-    <meta
-      name="keywords"
-      content="visualg, visualg studio, portugol, algoritmos, programacao, aprender programacao, ide portugol, electron visualg, compilador portugol, pseudocodigo"
+      content="VisuAlg Studio é uma IDE moderna e leve para Portugol com depuração interativa, autocomplete, geração automática de fluxogramas e suporte a Windows/Linux."
     />
     <meta name="author" content="Elvis Leite da Silva" />
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pt_BR" />
+    <meta property="og:site_name" content="VisuAlg Studio" />
     <meta
       property="og:url"
       content="https://elvis7t.github.io/visualg-studio/"
@@ -35,9 +33,13 @@
       property="og:image"
       content="https://raw.githubusercontent.com/elvis7t/visualg-studio/main/resources/social-preview.png"
     />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Logotipo e interface do VisuAlg Studio" />
 
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content="@elvis7t" />
     <meta
       property="twitter:url"
       content="https://elvis7t.github.io/visualg-studio/"
@@ -66,6 +68,11 @@
       "name": "VisuAlg Studio",
       "operatingSystem": "Windows, Linux",
       "applicationCategory": "EducationalApplication",
+      "softwareVersion": "0.1.0",
+      "downloadUrl": "https://github.com/elvis7t/visualg-studio/releases/latest",
+      "screenshot": "https://raw.githubusercontent.com/elvis7t/visualg-studio/main/resources/social-preview.png",
+      "softwareRequirements": "Node.js v18 ou superior (para rodar localmente)",
+      "featureList": "Depuração interativa, Autocomplete, Geração automática de fluxogramas, Multi-abas, Temas visuais (Dracula), Métricas de complexidade",
       "author": {
         "@type": "Person",
         "name": "Elvis Leite da Silva"
@@ -77,6 +84,40 @@
       },
       "url": "https://elvis7t.github.io/visualg-studio/",
       "description": "IDE moderna para algoritmos em Portugol, com depuração interativa, fluxogramas e suporte multiplataforma."
+    }
+    </script>
+
+    <!-- Schema.org FAQPage JSON-LD -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "O que é Portugol?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Portugol é uma pseudolinguagem estruturada em português usada para ensinar lógica de programação e algoritmos. Ela permite que estudantes iniciantes foquem na estrutura e na lógica do código, sem as barreiras e complexidades de sintaxe das linguagens de programação comerciais em inglês."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Qual a diferença entre Visualg e VisuAlg Studio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "O Visualg original é uma ferramenta clássica desenvolvida em Delphi e restrita ao ecossistema Windows legado. Já o VisuAlg Studio é uma reconstrução desktop moderna em código aberto baseada em Electron e Node.js. Ele oferece uma interface Dracula muito mais rápida, abas para arquivos, realce e autocompletar inteligente com CodeMirror 6, geração dinâmica de fluxogramas e execução segura através de Web Workers, mantendo compatibilidade com o Portugol tradicional."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Como instalar o VisuAlg Studio no Linux?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No Linux, você pode baixar o arquivo .AppImage ou o pacote .deb na página de Releases. Para a versão portátil .AppImage, basta dar permissão de execução (chmod +x VisuAlg-Studio-X.Y.Z.AppImage) e executá-lo. Ou instalar o pacote Debian/Ubuntu usando o comando: sudo dpkg -i visualg-studio_X.Y.Z_amd64.deb."
+          }
+        }
+      ]
     }
     </script>
 
