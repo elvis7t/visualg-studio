@@ -1,12 +1,12 @@
 {
   "name": "visualg-studio",
-  "version": "0.1.1",
+  "version": "0.1.0",
   "public": true,
   "type": "module",
   "description": "Modern Electron studio for Visualg algorithms.",
   "main": "src/main/main.js",
   "productName": "VisuAlg Studio",
-  "author": "Elvis Leite da Silva",
+  "author": "Elvis Leite da Silva <elvis7t@gmail.com>",
   "license": "MIT",
   "keywords": [
     "visualg",
