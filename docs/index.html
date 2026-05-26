@@ -1755,14 +1755,14 @@
           <div class="hero-cta-container">
             <div class="hero-cta">
               <a
-                href="https://github.com/elvis7t/visualg-studio/releases/latest"
+                href="https://github.com/elvis7t/visualg-studio/releases/latest/download/VisuAlg.Studio.Setup.0.1.0.exe"
                 class="btn btn-primary"
                 id="btn-download-exe"
               >
                 <i class="fa-solid fa-download"></i> Baixar para Windows (.exe)
               </a>
               <a
-                href="https://github.com/elvis7t/visualg-studio/releases/latest"
+                href="https://github.com/elvis7t/visualg-studio/releases/latest/download/VisuAlg-Studio-Portable-Windows.zip"
                 class="btn btn-secondary"
                 id="btn-download-zip"
               >
@@ -1773,8 +1773,16 @@
               <span>Outras opções:</span>
               <span class="divider">•</span>
               <span class="platform-group"
-                >Linux: <a href="#" id="link-download-deb">Pacote (.deb)</a> |
-                <a href="#" id="link-download-appimage"
+                >Linux:
+                <a
+                  href="https://github.com/elvis7t/visualg-studio/releases/latest/download/visualg-studio_0.1.0_amd64.deb"
+                  id="link-download-deb"
+                  >Pacote (.deb)</a
+                >
+                |
+                <a
+                  href="https://github.com/elvis7t/visualg-studio/releases/latest/download/VisuAlg.Studio-0.1.0.AppImage"
+                  id="link-download-appimage"
                   >Portátil (.AppImage)</a
                 ></span
               >
@@ -1785,7 +1793,7 @@
             <span
               >Integridade garantida por
               <a
-                href="https://github.com/elvis7t/visualg-studio/releases"
+                href="https://github.com/elvis7t/visualg-studio/releases/latest/download/SHA256SUMS.txt"
                 target="_blank"
                 rel="noopener"
                 id="release-hash-link"
@@ -2752,13 +2760,16 @@ Digite um número:
         const appImageUrl = appImage ? appImage.browser_download_url : fallback;
         const exeUrl = exe ? exe.browser_download_url : fallback;
         const zipUrl = zip ? zip.browser_download_url : fallback;
+        const sizeLabel = (asset) =>
+          asset && Number.isFinite(asset.size)
+            ? ` - ${(asset.size / (1024 * 1024)).toFixed(1)} MB`
+            : "";
 
         if (isLinuxPlatform) {
           // Linux Installer (.deb)
           if (deb) {
             btnInstaller.href = debUrl;
-            const sizeMb = (deb.size / (1024 * 1024)).toFixed(1);
-            btnInstaller.innerHTML = `<i class="fa-solid fa-download"></i> Baixar para Linux (.deb - ${sizeMb} MB)`;
+            btnInstaller.innerHTML = `<i class="fa-solid fa-download"></i> Baixar para Linux (.deb${sizeLabel(deb)})`;
           } else {
             btnInstaller.href = fallback;
             btnInstaller.innerHTML = `<i class="fa-solid fa-download"></i> Baixar para Linux (.deb)`;
@@ -2767,8 +2778,7 @@ Digite um número:
           // Linux Portable (.AppImage)
           if (appImage) {
             btnPortable.href = appImageUrl;
-            const sizeMb = (appImage.size / (1024 * 1024)).toFixed(1);
-            btnPortable.innerHTML = `<i class="fa-solid fa-file-zipper"></i> Versão Portátil (.AppImage - ${sizeMb} MB)`;
+            btnPortable.innerHTML = `<i class="fa-solid fa-file-zipper"></i> Versão Portátil (.AppImage${sizeLabel(appImage)})`;
           } else {
             btnPortable.href = fallback;
             btnPortable.innerHTML = `<i class="fa-solid fa-file-zipper"></i> Versão Portátil (.AppImage)`;
@@ -2785,8 +2795,7 @@ Digite um número:
           // Windows Installer (.exe)
           if (exe) {
             btnInstaller.href = exeUrl;
-            const sizeMb = (exe.size / (1024 * 1024)).toFixed(1);
-            btnInstaller.innerHTML = `<i class="fa-solid fa-download"></i> Baixar para Windows (${sizeMb} MB)`;
+            btnInstaller.innerHTML = `<i class="fa-solid fa-download"></i> Baixar para Windows${sizeLabel(exe)}`;
           } else {
             btnInstaller.href = fallback;
             btnInstaller.innerHTML = `<i class="fa-solid fa-download"></i> Baixar para Windows (.exe)`;
@@ -2795,8 +2804,7 @@ Digite um número:
           // Windows Portable (.zip)
           if (zip) {
             btnPortable.href = zipUrl;
-            const sizeMb = (zip.size / (1024 * 1024)).toFixed(1);
-            btnPortable.innerHTML = `<i class="fa-solid fa-file-zipper"></i> Versão Portátil (.zip - ${sizeMb} MB)`;
+            btnPortable.innerHTML = `<i class="fa-solid fa-file-zipper"></i> Versão Portátil (.zip${sizeLabel(zip)})`;
           } else {
             btnPortable.href = fallback;
             btnPortable.innerHTML = `<i class="fa-solid fa-file-zipper"></i> Versão Portátil (.zip)`;
@@ -2826,23 +2834,38 @@ Digite um número:
           "link-download-appimage",
         );
         const releaseTag = document.getElementById("release-tag");
+        const appVersion = document.querySelector(".app-version");
         const releaseHashLink = document.getElementById("release-hash-link");
 
-        // Fallback urls (if API fails)
+        // Direct fallback URLs keep downloads working if the GitHub API is slow
+        // or rate-limited. The dynamic API response still updates sizes/labels.
+        const fallbackTag = "v0.1.0";
         const fallbackUrl = `https://github.com/${repoOwner}/${repoName}/releases/latest`;
+        const latestAssetUrl = (fileName) =>
+          `https://github.com/${repoOwner}/${repoName}/releases/latest/download/${encodeURIComponent(fileName)}`;
+        const fallbackAssets = {
+          exe: { browser_download_url: latestAssetUrl("VisuAlg.Studio.Setup.0.1.0.exe") },
+          zip: { browser_download_url: latestAssetUrl("VisuAlg-Studio-Portable-Windows.zip") },
+          deb: { browser_download_url: latestAssetUrl("visualg-studio_0.1.0_amd64.deb") },
+          appImage: { browser_download_url: latestAssetUrl("VisuAlg.Studio-0.1.0.AppImage") },
+          hash: { browser_download_url: latestAssetUrl("SHA256SUMS.txt") },
+        };
 
         // Detect OS
         const userAgent = navigator.userAgent.toLowerCase();
         const isLinux = userAgent.includes("linux");
 
         // Initial render with fallbacks
+        releaseTag.innerText = fallbackTag;
+        if (appVersion) appVersion.innerText = fallbackTag;
         configureDownloadButtons(btnDownloadExe, btnDownloadZip, isLinux, {
-          deb: null,
-          appImage: null,
-          exe: null,
-          zip: null,
+          deb: fallbackAssets.deb,
+          appImage: fallbackAssets.appImage,
+          exe: fallbackAssets.exe,
+          zip: fallbackAssets.zip,
           fallback: fallbackUrl,
         });
+        setLinkHref(releaseHashLink, fallbackAssets.hash, fallbackUrl);
 
         fetch(apiUrl)
           .then((response) => {
@@ -2894,6 +2917,7 @@ Digite um número:
 
               if (data.tag_name) {
                 releaseTag.innerText = data.tag_name;
+                if (appVersion) appVersion.innerText = data.tag_name;
               }
             }
           })
@@ -2904,17 +2928,17 @@ Digite um número:
             );
             btnDownloadExe.href = fallbackUrl;
             btnDownloadZip.href = fallbackUrl;
-            if (linkDownloadExe) linkDownloadExe.href = fallbackUrl;
-            if (linkDownloadZip) linkDownloadZip.href = fallbackUrl;
-            if (linkDownloadDeb) linkDownloadDeb.href = fallbackUrl;
-            if (linkDownloadAppImage) linkDownloadAppImage.href = fallbackUrl;
-            releaseHashLink.href = `https://github.com/${repoOwner}/${repoName}/releases`;
+            if (linkDownloadExe) setLinkHref(linkDownloadExe, fallbackAssets.exe, fallbackUrl);
+            if (linkDownloadZip) setLinkHref(linkDownloadZip, fallbackAssets.zip, fallbackUrl);
+            if (linkDownloadDeb) setLinkHref(linkDownloadDeb, fallbackAssets.deb, fallbackUrl);
+            if (linkDownloadAppImage) setLinkHref(linkDownloadAppImage, fallbackAssets.appImage, fallbackUrl);
+            setLinkHref(releaseHashLink, fallbackAssets.hash, fallbackUrl);
 
             configureDownloadButtons(btnDownloadExe, btnDownloadZip, isLinux, {
-              deb: null,
-              appImage: null,
-              exe: null,
-              zip: null,
+              deb: fallbackAssets.deb,
+              appImage: fallbackAssets.appImage,
+              exe: fallbackAssets.exe,
+              zip: fallbackAssets.zip,
               fallback: fallbackUrl,
             });
           });
