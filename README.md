@@ -33,6 +33,11 @@ VisuAlg Studio é uma reconstrução desktop moderna do clássico Visualg, desen
 > [!IMPORTANT]
 > **Nota de Isenção de Responsabilidade:** Este é um projeto **independente e não oficial**, sem qualquer vínculo com os mantenedores ou autores originais do software VisuAlg. Ele foi criado como uma homenagem ao legado educacional da ferramenta e para modernizar o ecossistema de aprendizado de Portugol.
 
+> [!NOTE]
+> **Sobre aprender a programar:** Programar não é um ato mecânico. A cada minuto, tomamos decisões que exigem ponderação, julgamento cuidadoso e responsabilidade sobre o que o código faz. Quando um desenvolvedor deixa de pensar ativamente sobre o próprio código, passa a depender do acaso: o programa pode até funcionar, mas sem uma razão clara, compreendida e defensável.
+>
+> Ferramentas de inteligência artificial podem apoiar o estudo, acelerar descobertas e ajudar na revisão, mas não devem substituir esse fundamento. A capacidade de raciocinar sobre problemas, escolhas e consequências é essencial para formar desenvolvedores com pensamento crítico.
+
 ---
 
 ## 🚀 Instalação Rápida

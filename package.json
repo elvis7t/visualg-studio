@@ -6,7 +6,7 @@
   "description": "Modern Electron studio for Visualg algorithms.",
   "main": "src/main/main.js",
   "productName": "VisuAlg Studio",
-  "author": "Elvis Leite da Silva",
+  "author": "Elvis Leite da Silva <elvis7t@gmail.com>",
   "license": "MIT",
   "keywords": [
     "visualg",
@@ -72,6 +72,7 @@
     "linux": {
       "icon": "resources/icon.png",
       "category": "Development",
+      "maintainer": "Elvis Leite da Silva <elvis7t@gmail.com>",
       "target": [
         "AppImage",
         "deb"
